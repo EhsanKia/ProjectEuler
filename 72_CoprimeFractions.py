@@ -1,25 +1,12 @@
-from fractions import gcd, Fraction as F
-from collections import deque
-import time
+maxD = 1000000
 
-q = [ (2,1) ]
+def tot(n):
+    res = n
+    for i in range(2,int(n**0.5+1)):
+        if not n%i: res -= res/i
+        while not n%i: n /= i
+    if n > 1: 
+        res -= res/n
+    return res
 
-s = set()
-l=10000
-c=0
-
-s = time.time()
-while len(q) > 0:
-    v = q.pop()
-    c+=1
-    m1 = (2*v[0]-v[1],v[0])
-    m2 = (2*v[0]+v[1],v[0])
-    m3 = (v[0]+2*v[1],v[1])
-
-    if m1[0]<=l: q.append( m1 )
-    if m2[0]<=l: q.append( m2 )
-    if m3[0]<=l: q.append( m3 )
-
-print c
-print time.time()-s
-
+print sum(map(tot,range(2,maxD+1)))
