@@ -5,14 +5,9 @@
 # It can be verified that T285 = P165 = H143 = 40755.
 # Find the next triangle number that is also pentagonal and hexagonal.
 
-def T(n):
-    return n * (n + 1) // 2
-
-def P(n):
-    return n * (3 * n - 1) // 2
-
-def H(n):
-    return n * (2 * n - 1)
+T = lambda n: n * (n + 1) // 2
+P = lambda n: n * (3 * n - 1) // 2
+H = lambda n: n * (2 * n - 1)
 
 t_index, p_index, h_index = 286, 0, 0
 t_value, p_value, h_value = T(t_index), 0, 0

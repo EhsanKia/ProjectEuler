@@ -6,15 +6,18 @@
 
 # Evaluate the sum of all the amicable numbers under 10000.
 
+
 def divisors(n):
     items = []
-    for i in range(1, n//2 + 1):
+    for i in range(1, n // 2 + 1):
         if n % i == 0:
             items.append(i)
     return items
 
+
 def d(n):
     return sum(divisors(n))
+
 
 total = 0
 for n in range(1, 10000):
