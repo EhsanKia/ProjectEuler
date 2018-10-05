@@ -30,10 +30,7 @@ def arithmetic_outputs(digits):
 
 def consecutive_run_length(nums):
     """Returns the length of the consecutive run from 1 to n in a list of ints."""
-    for i, n in enumerate(sorted(nums), start=1):
-        if i != n:
-            return i - 1
-    return i
+    return next(i for i in itertools.count(1) if i not in nums) - 1
 
 
 # Define a function that finds all outputs and calculates the longest length.
