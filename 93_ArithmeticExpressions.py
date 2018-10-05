@@ -4,13 +4,17 @@ import operator
 OPS = [operator.add, operator.sub, operator.mul, operator.truediv]
 
 
-def arithmetic_outputs(digits):
-    """Computes all possible outputs applying arithmetic operations to 4 digits.
+def arithmetic_outputs_run_length(digits):
+    """Computes the consecutive run length in the aritchmetic outputs of 4 digits.
+
+    This method applies computers all possible positive integer outputs that can be
+    obtained after applying arithmetic operations (+. -, *, /) to the 4 given digits,
+    and then computes the longest consecutive run from 1 to n in those outputs.
 
     Args:
         digits: List of 4 positive digits.
     Returns:
-        Set of all possible positive integer outputs from arithmetic operations.
+        Longest consecutive run length
     """
     assert len(digits) == 4, "There must be exactly 4 digits in the list"
     assert [0 <= d < 10 for d in digits], "All 4 elements must be single digit"
@@ -25,15 +29,9 @@ def arithmetic_outputs(digits):
             result2 = op1(op2(a, b), op3(c, d))
             if result2 > 0 and result2 % 1 == 0:
                 outputs.add(result2)
-    return outputs
+
+    # Computes the length of the consecutive run from 1 to n in the outputs.
+    return next(i for i in itertools.count(1) if i not in outputs) - 1
 
 
-def consecutive_run_length(nums):
-    """Returns the length of the consecutive run from 1 to n in a list of ints."""
-    return next(i for i in itertools.count(1) if i not in nums) - 1
-
-
-# Define a function that finds all outputs and calculates the longest length.
-longest_arithmetic_length = lambda x: consecutive_run_length(arithmetic_outputs(x))
-
-print max(itertools.combinations(range(1, 10), 4), key=longest_arithmetic_length)
+print max(itertools.combinations(range(1, 10), 4), key=arithmetic_outputs_run_length)
