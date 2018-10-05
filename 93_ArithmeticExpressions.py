@@ -5,10 +5,10 @@ OPS = [operator.add, operator.sub, operator.mul, operator.truediv]
 
 
 def arithmetic_outputs_run_length(digits):
-    """Computes the consecutive run length in the aritchmetic outputs of 4 digits.
+    """Computes the consecutive run length in the arithmetic outputs of 4 digits.
 
-    This method applies computers all possible positive integer outputs that can be
-    obtained after applying arithmetic operations (+. -, *, /) to the 4 given digits,
+    This method computes all possible positive integer outputs that can be obtained
+    after applying the arithmetic operations (+. -, *, /) to the 4 given digits,
     and then computes the longest consecutive run from 1 to n in those outputs.
 
     Args:
@@ -24,10 +24,10 @@ def arithmetic_outputs_run_length(digits):
     for a, b, c, d in itertools.permutations(digits):
         for op1, op2, op3 in itertools.product(OPS, repeat=3):
             result1 = op1(op2(op3(a, b), c), d)
-            if result1 > 0 and result1 % 1 == 0:
+            if result1 > 0 and float(result1).is_integer():
                 outputs.add(result1)
             result2 = op1(op2(a, b), op3(c, d))
-            if result2 > 0 and result2 % 1 == 0:
+            if result2 > 0 and float(result2).is_integer():
                 outputs.add(result2)
 
     # Computes the length of the consecutive run from 1 to n in the outputs.
